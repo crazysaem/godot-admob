@@ -45,11 +45,18 @@ public class GodotAdMob extends Godot.SingletonBase
 	 * Prepare for work with AdMob
 	 * @param boolean isReal Tell if the enviroment is for real or test
 	 */
-	public void init(boolean isReal, int instance_id)
+	public void init(boolean isReal, int instance_id, final String admob_app_id)
 	{
 		this.isReal = isReal;
 		this.instance_id = instance_id;
 		Log.d("godot", "AdMob: init");
+		activity.runOnUiThread(new Runnable()
+		{
+			@Override public void run()
+			{
+				MobileAds.initialize(activity, admob_app_id);
+			}
+		});
 	}
 
 
